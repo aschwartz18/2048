@@ -1,7 +1,7 @@
 {
   "name": "2048-gamecenter",
   "version": "0.0.0",
-  "description": "API for saving and displaying 2048 scores",
+  "description": "This app stores and displays 2048 scores",
   "main": "app.js",
   "dependencies": {
     "express": "^3.5.1",
@@ -22,11 +22,17 @@
   ],
   "author": "Allison Schwartz",
   "license": "ISC",
+  "engines": {
+    "node": "0.10.x"
+  },
   "bugs": {
     "url": "https://github.com/aschwartz18/2048/issues"
   },
   "homepage": "https://github.com/aschwartz18/2048",
-  "engines": {
-    "node": "0.10.x"
-  }
+  "dependencies": {
+    "express": "^3.5.1",
+    "logfmt": "^1.1.2",
+    "mongodb": "*"
+  },
+  "devDependencies": {}
 }
