@@ -27,3 +27,8 @@
   },
   "homepage": "https://github.com/aschwartz18/2048"
 }
+{
+  "engines": {
+    "node": "0.10.x"
+  }
+}

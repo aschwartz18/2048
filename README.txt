@@ -9,13 +9,13 @@ Prof. Ming Chow
 1. Sections that have been implemented:
 	GET /scores.json API
 	/ root API
-
-   Sections that have not been implemented:
 	POST /submit.json API
 	Enabling cross-origin resource sharing
+
+   Sections that have not been implemented:
 	Deploying to Heroku
 
-2. Discussed the assignment with multiple TA's (Jasper, Conner)
+2. Discussed the assignment with multiple TA's (Jasper, Conner, Nate)
 
 3. Spent approximately 10 hours completing the assignment.
 
@@ -30,7 +30,8 @@ Prof. Ming Chow
 		Added script reference to JQuery in head
 
 	Modifications to game_manager.js:
-		After line 37, inserted Ajax post request. Sample code:
+		In the function GameManager.prototype.actuate(), inserted Ajax post request. Sample code:
+		    var jgrid = JSON.stringify(this.grid);
 		    $.post( "http://localhost:3000/submit.json", {
         		username: usr,
         		score: this.score,

@@ -3,21 +3,20 @@ var express = require('express');
 var app = express(express.logger());
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.bodyParser());
 app.set('title', 'nodeapp');
 
 // Cross-origin resource sharing
 app.all('*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
 });
 
 // Mongo initialization
 var mongoUri = process.env.MONGOLAB_URI || 
-  process.env.MONGOHQ_URL || 
-  'mongodb://localhost/scorecenter';
+    process.env.MONGOHQ_URL || 
+    'mongodb://localhost/scorecenter';
 var mongo = require('mongodb');
 var db = mongo.Db.connect(mongoUri, function (error, databaseConnection) {
 	db = databaseConnection;
@@ -25,16 +24,16 @@ var db = mongo.Db.connect(mongoUri, function (error, databaseConnection) {
 
 // Format time
 function getTime()  {
-    	var cdate = new Date();
-	    var time = cdate.getMonth() + "/";
-    	time += cdate.getDay() + "/";
-	    time += cdate.getFullYear() + " ";
-  		time += cdate.getHours() + ":";
-	    if (cdate.getMinutes() < 10) {
-    		time += "0" + cdate.getMinutes();
-	    }
-    	else {time += cdate.getMinutes()}
-    	return time;
+    var cdate = new Date();
+	var time = cdate.getMonth() + "/";
+    time += cdate.getDay() + "/";
+	time += cdate.getFullYear() + " ";
+    time += cdate.getHours() + ":";
+	if (cdate.getMinutes() < 10) {
+    	time += "0" + cdate.getMinutes();
+	}
+    else {time += cdate.getMinutes()}
+    return time;
 }
 
 app.get('/scores.json', function (request, response) {
