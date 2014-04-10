@@ -44,7 +44,9 @@ app.get('/scores.json', function (request, response) {
 	else {
 		db.collection('scores', function(er, collection) {
 			collection.find({username: usr}).sort({score: -1}).toArray(function(err, results){
-				response.send(results);
+				if (!err) {
+					response.send(results);
+				}
 			});
 		});
 	}
@@ -66,7 +68,9 @@ app.post('/submit.json', function(request, response) {
 			'created_at': time
 		};
 		db.collection('scores', function(er, collection) {
-			collection.insert(record);
+			if (!er) {
+				collection.insert(record);
+			}
 		});
 	}
 });
@@ -74,12 +78,14 @@ app.post('/submit.json', function(request, response) {
 app.get('/', function(request, response) {
 	db.collection('scores', function(er, collection) {
 		collection.find().sort({score: -1}).toArray(function(err, results) {
-			var html = "<h1>2048 Game Scores</h1><table><tr><th>Score</th><th>Username</th><th>Time</th></tr>";
-			for (var i = 0; i < results.length; i++) {
-				html += "<tr><td>" + results[i]['score'] + "</td><td>" + results[i]['username'] + "</td><td>" + results[i]['created_at'] + "</td></tr>";
+			if (!err) {
+				var html = "<!DOCTYPE HTML><html><head><title>2048 Scores</title></head><body><h1>2048 Game Scores</h1><table><tr><th>Score</th><th>Username</th><th>Time</th></tr>";
+				for (var i = 0; i < results.length; i++) {
+					html += "<tr><td>" + results[i]['score'] + "</td><td>" + results[i]['username'] + "</td><td>" + results[i]['created_at'] + "</td></tr>";
+				}
+				html += "</table></body></html>"
+				response.send(html);
 			}
-			html += "</table>"
-			response.send(html);
 		});
 	});
 });
