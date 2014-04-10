@@ -25,9 +25,7 @@
   "bugs": {
     "url": "https://github.com/aschwartz18/2048/issues"
   },
-  "homepage": "https://github.com/aschwartz18/2048"
-}
-{
+  "homepage": "https://github.com/aschwartz18/2048",
   "engines": {
     "node": "0.10.x"
   }
