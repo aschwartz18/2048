@@ -1,4 +1,10 @@
+ // see insert by Allison below!
+ var usr = "AlliS";
+ // see insert by Allison above!
+
+
 function GameManager(size, InputManager, Actuator, StorageManager) {
+
   this.size           = size; // Size of the grid
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
@@ -87,6 +93,16 @@ GameManager.prototype.actuate = function () {
 
   // Clear the state when the game is over (game over only, not win)
   if (this.over) {
+
+      // new stuff written by Alli below
+      var jgrid = JSON.stringify(this.grid);
+      $.post( "http://localhost:3000/submit.json", {
+        username: usr,
+        score: this.score,
+        grid: jgrid,
+      });
+      // new stuff written by Alli above
+
     this.storageManager.clearGameState();
   } else {
     this.storageManager.setGameState(this.serialize());
