@@ -4,14 +4,7 @@ var app = express(express.logger());
 app.use(express.json());
 app.use(express.urlencoded());
 app.set('title', 'nodeapp');
-
-// Cross-origin resource sharing
-app.all('*', function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});
+// var.path(require('path'));
 
 // Mongo initialization
 var mongoUri = process.env.MONGOLAB_URI || 
@@ -53,8 +46,10 @@ app.get('/scores.json', function (request, response) {
 });
 
 app.post('/submit.json', function(request, response) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Content-Type');
 	var usr = request.body.username;
-	var score = request.body.score;
+	var score = Number(request.body.score);
 	var grid = request.body.grid;
 	if (usr == null || score == null || grid == null) {
 		response.send("Bad data!");
@@ -73,6 +68,7 @@ app.post('/submit.json', function(request, response) {
 			}
 		});
 	}
+	response.send(200);
 });
 
 app.get('/', function(request, response) {
